@@ -10,22 +10,22 @@ class Cuti extends CI_Controller {
 		if($this->session->userdata('status') != "Login"){
 			redirect(base_url("welcome"));
 		}
-		if($this->session->userdata('tipe') != "atasan"){
-			redirect(base_url("main"));
-		}
 	}
 	
 	function index(){
 		$data = $this->M_CallSQL->sessdata();
-		$data['cuti']= $this->M_CallSQL->get_cuti()->result();
+		$data['cuti']= $this->M_CallSQL->get_cuti($data['id'])->result();
+		
 		$this->load->view('template/v_header', $data);
 		$this->load->view('content/v_daftarcuti', $data);
 		$this->load->view('template/v_footer');
 	}
 
-	function detail(){
+	function detail($detil){
 		$data = $this->M_CallSQL->sessdata();
-		$data['cuti']= $this->M_CallSQL->get_cuti()->result();
+		$data['cuti']= $this->M_CallSQL->get_cuti_detail($detil)->row();
+		$data['verifikator']= $this->M_CallSQL->get_profile($data['cuti']->c_atasan)->row();
+		$data['pengaju']= $this->M_CallSQL->get_profile($data['cuti']->p_id)->row();
 		$this->load->view('template/v_header', $data);
 		$this->load->view('content/v_detailcuti', $data);
 		$this->load->view('template/v_footer');
@@ -49,11 +49,13 @@ class Cuti extends CI_Controller {
 				if(!$atasan){
 					$this->session->set_flashdata('gagal_tambah', 'Harap pilih atasan terlebih dahulu.');
 					redirect(base_url('cuti/add'));
-				}
-				else if($dari < date('Y-m-d H:i:s') || $sampai < date('Y-m-d H:i:s')){
+				}else if($dari < date('Y-m-d') || $sampai < date('Y-m-d')){
 					$this->session->set_flashdata('gagal_tambah', 'Input tanggal salah, silahkan cek kembali pengisian dokumen.');
 					redirect(base_url('cuti/add'));
-				} else {
+				}else if($lama > $data['jatah']){
+					$this->session->set_flashdata('gagal_tambah', 'Saldo cuti tidak cukup.');
+					redirect(base_url('cuti/add'));
+				}else {
 
 					$config['upload_path']          = './uploads/';
 					$config['allowed_types']        = 'gif|jpg|png|pdf';
@@ -128,4 +130,35 @@ class Cuti extends CI_Controller {
     	force_download($pdf, NULL);
 	}
 
+	public function pdf($id){
+		// $data = $this->M_CallSQL->sessdata();
+		// $data['cuti']= $this->M_CallSQL->get_cuti_detail($id)->row();
+		// $data['verifikator']= $this->M_CallSQL->get_profile($data['cuti']->c_atasan)->row();
+  //       $this->load->view('content/v_pdf', $data);
+  //       // // Get output html
+  //       $html = $this->output->get_output();
+  //       // // Load pdf library
+  //       $this->load->library('pdf');
+  //       // // Load HTML content
+  //        $this->tcpdf->WriteHTML();
+  //       // // (Optional) Setup the paper size and orientation
+  //       // $this->dompdf->setPaper('A5', 'landscape');
+  //       // // Render the HTML as PDF
+  //       // $this->dompdf->render();
+  //       // // Output the generated PDF (1 = download and 0 = preview)
+  //       // $this->dompdf->stream('barcode_'.$data['dokumen'][0]->d_nomor.'.pdf', array("Attachment"=>0));
+		// Load autoloader (using Composer)
+		$data = $this->M_CallSQL->sessdata();
+		$data['cuti']= $this->M_CallSQL->get_cuti_detail($id)->row();
+		$data['verifikator']= $this->M_CallSQL->get_profile($data['cuti']->c_atasan)->row();
+		$data['pengaju']= $this->M_CallSQL->get_profile($data['cuti']->p_id)->row();
+		$this->load->library('Pdf');
+		$this->load->view('content/v_printdetil',$data);
+	}
+
+	function laporan(){ 
+		$data = $this->M_CallSQL->sessdata();
+		$data['cuti']= $this->M_CallSQL->get_cuti($data['id'])->result();
+		$this->load->view('content/v_laporan',$data);
+	}
 }

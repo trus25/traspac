@@ -203,11 +203,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <i class="fa fa-book"></i> <span>Pengajuan Cuti</span>
           </a>
         </li>
+        <?php if($tipe=='atasan'){ ?>
         <li>
           <a href="<?php echo config_item('base_url');?>verifikasi">
             <i class="fa fa-check"></i> <span>Verifikasi Cuti</span>
           </a>
         </li>
+      <?php } ?>
       </ul>
     </section>
     <!-- /.sidebar -->

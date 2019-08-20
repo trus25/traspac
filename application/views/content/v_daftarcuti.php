@@ -65,6 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <li><a href="<?php echo base_url('cuti/add') ?>" style="color:white;">Form Pengajuan</a></li>
                     <li><a href="<?php echo base_url('cuti') ?>" style="color:white;">Daftar Pengajuan</a></li>
                 </ul>
+                <a href="<?php echo base_url('cuti/laporan') ?>" title="download berkas" class="btn btn-circle" style="float: right;color:white;margin-top: 10px;margin-right: 4%;"><i class="fa fa-print fa-lg"></i></a>
                 <form class="navbar-form navbar-left row" role="search">
                   <div class="col-md-1"></div>
                   <div class="col-md-11">
@@ -106,7 +107,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <th style="text-align: center">Tanggal & Jenis Cuti</th>
                     <th style="text-align: center">Lama Cuti</th>
                     <th style="text-align: center">Tempat Cuti</th>
-                    <th style="text-align: center">Jenis Cuti</th>
+                    <th style="text-align: center">Status Cuti</th>
                     <th style="text-align: center">-</th>
                     <th style="text-align: center">Tanggal Permohonan</th>
                     <th style="text-align: center">Aksi</th>
@@ -129,7 +130,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       }?><br><?php echo $ct->c_tanggal; ?></td>
                       <td style="text-align: center">-</td>
                       <td style="text-align: center"><?php echo format_tanggal_pgj($ct->c_tanggal); ?></td>
-                      <td style="text-align: center"><a href="cuti/download/<?php echo $ct->c_file; ?>" class="btn btn-circle" style="color:#374961"><i class="fa fa-download"></i></a>
+                      <td style="text-align: center"><a href="cuti/download/<?php echo $ct->c_file; ?>" title="download berkas" class="btn btn-circle" style="color:#374961"><i class="fa fa-download"></i></a>
                     </tr>
                   <?php } ?>
                 </tbody>

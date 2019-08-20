@@ -73,7 +73,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<h2 class="text-secondary">Daftar Pelayanan</h2>
 											<ul class="list-group">
 											    <a class="list-group-item list-group-item-action" style="border:none;" href="<?php echo base_url('cuti');?>"><h6 class="card-text"><i class="fa fa-book fa-lg"></i> Pengajuan Cuti Online</h6></a>
+                          <?php if($tipe=='atasan'){ ?>
 										    	<a class="list-group-item list-group-item-action" style="border:none;" href="<?php echo base_url('verifikasi');?>"><h6 class="card-text"><i class="fa fa-check fa-lg"></i> Verifikasi Cuti</h6></a>
+                        <?php } ?>
 										    </ul>
 							  </div>
 							</div>

@@ -46,95 +46,83 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <!-- /.box-header -->
             <div id="pengajuan">
               <div class="box-body">
-                <form role="form" action="<?php echo base_url('cuti/add') ?>" method="POST" enctype="multipart/form-data">
                   <div class="row">
-                    <div class="col-md-8 form-horizontal">
+                    <div class="col-md-6 form-horizontal">
                       <div class="form-group">
-                        <label class="col-md-3 control-label" style="text-align: left; color:#20d420;font-size: 120%;">Sisa Cuti</label>
-                      </div>
-                      <div class="form-group">
-                        <label class="col-md-3 control-label" style="text-align: left;color:#c9c9c9;">Saldo Cuti 2019</label>
-                        <label class="col-md-3 control-label" style="text-align: left;color:#c9c9c9;"><?php echo $jatah; ?></label>
-                      </div>
-                      <div>
-                        <label style="font-size: 120%;color:#20d420;text-align: left;">Keterangan Pegawai</label>
+                        <label class="col-md-3 control-label" style="text-align: left; color:#20d420;font-size: 120%;">Detail Pengajuan Cuti</label>
                       </div>
                       <div class="form-group">
-                        <label class="col-md-3 control-label" style="text-align: left;">Nama</label>
-                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $name;?></label>
+                        <label class="col-md-3 control-label" style="text-align: left;">Jenis Cuti</label>
+                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $cuti->c_jenis;?></label>
                       </div>
                       <div class="form-group">
-                        <label class="col-md-3 control-label" style="text-align: left;">NIP</label>
-                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $id;?></label>
+                        <label class="col-md-3 control-label" style="text-align: left;">Tanggal Cuti</label>
+                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $cuti->c_dari;?> - <?php echo $cuti->c_sampai;?></label>
                       </div>
                       <div class="form-group">
-                        <label class="col-md-3 control-label" style="text-align: left;">Jabatan</label>
-                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $role;?></label>
+                        <label class="col-md-3 control-label" style="text-align: left;">Lama Cuti</label>
+                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $cuti->c_lama;?></label>
                       </div>
                       <div class="form-group">
-                        <label class="col-md-3 control-label" style="text-align: left;">Golongan</label>
-                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $golongan;?></label>
+                        <label class="col-md-3 control-label" style="text-align: left;">Tempat Cuti</label>
+                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $cuti->c_tempat;?></label>
                       </div>
                       <div class="form-group">
-                        <label class="col-md-3 control-label" style="text-align: left;">Unit Kerja</label>
-                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $unit;?></label>
+                        <label class="col-md-3 control-label" style="text-align: left;">Keperluan</label>
+                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $cuti->c_keperluan;?></label>
                       </div>
                       <div class="form-group">
-                        <label class="col-md-9 control-label" style="font-size: 120%;color:#20d420;text-align: left;">Pejabat yang menyetujui</label>
-                        <div class="col-md-3">
-                          <input type="button" class="btn btn-default btn-xs form-control" style="border-radius:16px;" value="Pilih Atasan" data-toggle="modal" data-target="#modal">
-                        </div>
+                        <label class="col-md-3 control-label" style="text-align: left;">Alamat dan Nomor Telpon yang dapat dihubungi</label>
+                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $cuti->c_kontak;?></label>
                       </div>
+                      <a href="<?php echo base_url().'cuti/pdf/'.$cuti->c_id; ?>" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print Detail</a>
                     </div>
-                    <div class="col-md-4 form-horizontal">
+                    <div class="col-md-6 form-horizontal">
                       <div>
                         <label style="font-size: 120%;color:#20d420;text-align: left;">Keterangan Pegawai</label>
                       </div>
                       <div class="form-group">
                         <label class="col-md-3 control-label" style="text-align: left;">Nama</label>
-                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $name;?></label>
+                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $pengaju->p_nama;?></label>
                       </div>
                       <div class="form-group">
                         <label class="col-md-3 control-label" style="text-align: left;">NIP</label>
-                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $id;?></label>
+                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $pengaju->p_id;?></label>
                       </div>
                       <div class="form-group">
                         <label class="col-md-3 control-label" style="text-align: left;">Jabatan</label>
-                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $role;?></label>
+                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $pengaju->r_nama;?></label>
                       </div>
                       <div class="form-group">
                         <label class="col-md-3 control-label" style="text-align: left;">Golongan</label>
-                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $golongan;?></label>
+                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $pengaju->g_tingkat;?></label>
                       </div>
                       <div class="form-group">
                         <label class="col-md-3 control-label" style="text-align: left;">Unit Kerja</label>
-                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $unit;?></label>
+                        <label class="col-md-6 control-label" style="text-align: left;"><?php echo $pengaju->p_unitkerja;?></label>
                       </div>
                       <div class="form-group">
                         <label class="col-md-9 control-label" style="font-size: 120%;color:#20d420;text-align: left;">Pejabat yang menyetujui</label>
-                        <div class="col-md-3">
-                          <input type="button" class="btn btn-default btn-xs form-control" style="border-radius:16px;" value="Pilih Atasan" data-toggle="modal" data-target="#modal">
-                        </div>
                       </div>
                       <div class="form-group">
                         <label class="col-md-3 control-label" style="text-align: left;">Nama</label>
-                        <label class="col-md-6 control-label" name="atasan_nama" style="text-align: left;"></label>
+                        <label class="col-md-6 control-label" name="atasan_nama" style="text-align: left;"><?php echo $verifikator->p_nama;?></label>
                       </div>
                       <div class="form-group">
                         <label class="col-md-3 control-label" style="text-align: left;">NIP</label>
-                        <label class="col-md-6 control-label" name="atasan_nip" style="text-align: left;"></label>
+                        <label class="col-md-6 control-label" name="atasan_nip" style="text-align: left;"><?php echo $verifikator->p_id;?></label>
                       </div>
                       <div class="form-group">
                         <label class="col-md-3 control-label" style="text-align: left;">Jabatan</label>
-                        <label class="col-md-6 control-label" name="atasan_jabatan" style="text-align: left;"></label>
+                        <label class="col-md-6 control-label" name="atasan_jabatan" style="text-align: left;"><?php echo $verifikator->r_nama;?></label>
                       </div>
                       <div class="form-group">
                         <label class="col-md-3 control-label" style="text-align: left;">Golongan</label>
-                        <label class="col-md-6 control-label" name="atasan_golongan" style="text-align: left;"></label>
+                        <label class="col-md-6 control-label" name="atasan_golongan" style="text-align: left;"><?php echo $verifikator->g_tingkat;?></label>
                       </div>
                       <div class="form-group">
                         <label class="col-md-3 control-label" style="text-align: left;">Unit Kerja</label>
-                        <label class="col-md-6 control-label" name="atasan_unit" style="text-align: left;"></label>
+                        <label class="col-md-6 control-label" name="atasan_unit" style="text-align: left;"><?php echo $verifikator->p_unitkerja;?></label>
                       </div>
                       <div>
                         <br>
@@ -149,8 +137,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <br>
                   <!-- /.row -->
               </div>
-              <input type="Submit" class="btn btn-primary btn-md" style="float:Right;" value="Submit" />
-                </form>
               <!-- /.box-body -->
             </div>
             <!-- /.box -->
@@ -162,41 +148,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </section>
     <!-- /.content -->
   </div>
-
-  <!-- Modal -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" style="text-align: center;"id="exampleModalLongTitle">Harap Pilih Atasan</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-body table-responsive no-padding">
-              <table class="table table-hover" id="daftar-atasan">
-                <?php foreach ($list as $ls) {?>
-                  <tr id="<?php echo $ls->p_id; ?>">
-                    <td style="text-align: center;"><h4><b><?php echo $ls->p_nama?></b></h4></td>
-                    <td style="text-align: center;"><h4><b><?php echo $ls->r_nama?></b></h4></td>
-                  </tr>
-                <?php } ?>
-              </tbody></table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-        </div>
-      </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="ok" class="btn btn-success">Pilih</button>
-      </div>
-    </div>
-  </div>
-</div>`

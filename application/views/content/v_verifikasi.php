@@ -28,11 +28,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Pengajuan Cuti
+        Verifikasi Cuti
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url();?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Pengajuan Cuti</li>
+        <li class="active">Verifikasi Cuti</li>
       </ol>
     </section>
 
@@ -56,46 +56,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="col-md-12">
           <div class="box">
             <div class="box-header" style="background: #374961;">
-              <h3 class="box-title" style="color:white;">Form Input Dokumen</h3>
+              <h3 class="box-title" style="color:white;">Verifikasi Pengajuan</h3>
               <a href="<?php echo base_url('main');?>"><button type="button" class="btn btn-md btn-primary" style="float: right;">Kembali</button></a>
                 <!-- Modal Dokumen -->
             </div>
             <div id="menu" class="box-header" style="background:  #001F3E">
-                <ul class="nav navbar-nav">
-                    <li><a href="<?php echo base_url('cuti/add') ?>" style="color:white;">Form Pengajuan</a></li>
-                    <li><a href="<?php echo base_url('cuti') ?>" style="color:white;">Daftar Pengajuan</a></li>
-                </ul>
-                <form class="navbar-form navbar-left row" role="search">
-                  <div class="col-md-1"></div>
-                  <div class="col-md-11">
-                    <div class="form-group">
-                      <div class="row">
-                        <div class="col-md-3">
-                          <input type="text" class="form-control" name="min" id="min" placeholder="Dari...">
-                        </div>
-                        <div class="col-md-3">
-                          <input type="text" class="form-control" name="max" id="max" placeholder="Sampai...">
-                        </div>
-                        <div class="col-md-3">
-                          <select class="form-control" id="jenis_cuti" name="jenis_cuti" placeholder="test">
-                            <option></option>
-                            <option value="Cuti Alasan Penting">Cuti Alasan Penting</option>
-                            <option value="Cuti Tahunan">Cuti Tahunan</option>
-                            <option value="Cuti Sakit">Cuti Sakit</option>
-                          </select>
-                        </div>
-                        <div class="col-md-3">
-                          <select class="form-control" id="status_cuti" name="status_cuti">
-                            <option></option>
-                            <option value="Usulan Baru">Usulan Baru</option>
-                            <option value="Disetujui Atasan">Disetujui Atasan</option>
-                            <option value="Ditolak Atasan">Ditolak Atasan</option>
-                          </select>
+              <div class="row">
+                <div class=col-md-1>
+                </div>
+                <div class=col-md-11>
+                  <form class="navbar-form navbar-left row" role="search">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-11">
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <input type="text" class="form-control" name="min" id="min" placeholder="Dari...">
+                          </div>
+                          <div class="col-md-3">
+                            <input type="text" class="form-control" name="max" id="max" placeholder="Sampai...">
+                          </div>
+                          <div class="col-md-3">
+                            <select class="form-control" id="jenis_cuti" name="jenis_cuti" placeholder="test">
+                              <option></option>
+                              <option value="Cuti Alasan Penting">Cuti Alasan Penting</option>
+                              <option value="Cuti Tahunan">Cuti Tahunan</option>
+                              <option value="Cuti Sakit">Cuti Sakit</option>
+                            </select>
+                          </div>
+                          <div class="col-md-3">
+                            <select class="form-control" id="status_cuti" name="status_cuti">
+                              <option></option>
+                              <option value="Usulan Baru">Usulan Baru</option>
+                              <option value="Disetujui Atasan">Disetujui Atasan</option>
+                              <option value="Ditolak Atasan">Ditolak Atasan</option>
+                            </select>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
+              </div>
             </div>
               <!-- /.box-header -->
             <div class="box-body">
@@ -136,9 +138,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <td style="text-align: center"><?php echo format_tanggal_pgj($ct->c_tanggal); ?></td>
                       <td style="text-align: center"><?php echo format_tanggal($ct->c_tanggal); ?></td>
                       <td style="text-align: center">
-                        <a href="" class="btn btn-info btn-circle" title="Setuju"><i class="fa fa-check"></i></a>
-                        <a href="" class="btn btn-warning btn-circle" title="Tolak"><i class="fa fa-times"></i></a>
-                        <a href="" class="btn btn-default btn-circle">Lihat Detail</i></a>
+                        <?php if($ct->c_status=='new'){?>
+                        <a href="verifikasi/acc/<?php echo $ct->c_id; ?>" class="btn btn-success btn-circle" title="Setuju"><i class="fa fa-check"></i></a>
+                        <a href="verifikasi/rjct/<?php echo $ct->c_id; ?>" class="btn btn-danger btn-circle" title="Tolak"><i class="fa fa-times"></i></a>
+                        <?php } ?>
+                        <a href="cuti/download/<?php echo $ct->c_file; ?>" title="download berkas" class="btn btn-default btn-circle" style="color:#374961"><i class="fa fa-download"></i></a>
+                        <a href="cuti/detail/<?php echo $ct->c_id; ?>" class="btn btn-default btn-circle">Lihat Detail</i></a>
                       </td>
                     </tr>
                   <?php } ?>

@@ -58,11 +58,35 @@ class M_CallSQL extends CI_Model{
 		return $query;
 	}
 
-	function get_cuti(){
+	function get_cuti($data){
 		$this->db->select('*');
 		$this->db->from('tr_cuti');
 		$this->db->join('tr_pengguna', 'tr_pengguna.p_id = tr_cuti.p_id');
 		$this->db->join('tr_role', 'tr_role.r_id = tr_pengguna.r_id');
+		$this->db->where('tr_cuti.p_id', $data);
+		$this->db->or_where('tr_cuti.c_atasan', $data);
+		$this->db->order_by('c_id', 'ASC');
+		$query = $this->db->get();
+		return $query;
+	}
+
+	function get_verif($data){
+		$this->db->select('*');
+		$this->db->from('tr_cuti');
+		$this->db->join('tr_pengguna', 'tr_pengguna.p_id = tr_cuti.p_id');
+		$this->db->join('tr_role', 'tr_role.r_id = tr_pengguna.r_id');
+		$this->db->where($data);
+		$this->db->order_by('c_id', 'ASC');
+		$query = $this->db->get();
+		return $query;
+	}
+
+	function get_cuti_detail($data){
+		$this->db->select('*');
+		$this->db->from('tr_cuti');
+		$this->db->join('tr_pengguna', 'tr_pengguna.p_id = tr_cuti.p_id');
+		$this->db->join('tr_role', 'tr_role.r_id = tr_pengguna.r_id');
+		$this->db->where('tr_cuti.c_id', $data);
 		$this->db->order_by('c_id', 'ASC');
 		$query = $this->db->get();
 		return $query;
